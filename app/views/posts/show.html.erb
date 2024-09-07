@@ -1,0 +1,16 @@
+<div class="post-summary card shadow-lg rounded-5", style="background: #F0F9F5">
+  <div class="card-body">
+    <h1><%= @post.title %></h1>
+    <p><%= @post.body %></p>
+    <p><%= @post.created_at.strftime("%d %B %Y") %></p>
+
+    <% if user_signed_in? && @post.user == current_user %>
+      <div class="post-actions text-end">
+        <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-primary" %>
+        <%= link_to "Delete", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger" %>
+      </div>
+    <% end %>
+
+    <%= link_to 'Back to posts', posts_path, class: "btn btn-secondary" %>
+  </div>
+</div>

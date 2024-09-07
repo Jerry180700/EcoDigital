@@ -1,0 +1,16 @@
+<br>
+<div class="m-4">
+  <% if user_signed_in? %>
+    <div class="fixed-top mt-5"><%= link_to 'New Post', new_post_path, class: " mt-5 btn btn-success w-100" %></div>
+  <% end %>
+  <% @posts.each do |post| %>
+    <div class="post-summary card shadow-lg rounded-5", style="background: #F0F9F5">
+      <div class="card-body text-center">
+        <h2><%= link_to post.title, post, class: "text-decoration-none" %></h2>
+        <p><%= post.body.truncate(100) %></p>
+        <hr>
+      </div>
+    </div>
+  <% end %>
+  <%= will_paginate @posts, class: 'pagination text-center' %>
+</div>

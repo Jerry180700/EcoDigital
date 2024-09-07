@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   # List all posts
   def index
-    @posts = Post.all
+    @posts = Post.page(params[:page]).per(5)
   end
 
   # Show a post
@@ -42,7 +42,11 @@ class PostsController < ApplicationController
   # Delete a post
   def destroy
     @post.destroy
-    redirect_to posts_url, notice: 'Post deleted successfully!'
+    respond_to do |format|
+      format.html { redirect_to posts_url, notice: 'Post deleted successfully!' }
+      format.json { head :no_content }
+    end
+    # redirect_to posts_url, notice: 'Post deleted successfully!'
   end
 
   private
